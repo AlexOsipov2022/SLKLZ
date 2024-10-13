@@ -11,12 +11,12 @@ import java.time.Duration;
 public class TestSL {
 
     @Test
-    public void testSl() {
+    public void testSl() throws InterruptedException {
 
         WebDriver driver = new ChromeDriver();
 
-//      driver.get("https://kz-solva-release-300.kz.idfaws.com/registration/step1");
-        driver.get("https://solva.kz/registration/step1");
+        driver.get("https://kz-solva-release-300.kz.idfaws.com/registration/step1");
+//        driver.get("https://solva.kz/registration/step1");
 
 //      System.out.println("Title -->  " + driver.getTitle());
 
@@ -34,15 +34,28 @@ public class TestSL {
         email.sendKeys("775555555@gmail.com");
         submitButton.click();
 
+        Thread.sleep(2000);
         WebElement message = driver.findElement(By.xpath("//body/div/div/form/h2"));
         Assert.assertEquals(message.getText(), "ВВЕДИТЕ КОД ИЗ SMS");
 
-        @Test
-                public void test_2() {
+        WebElement textSMS = driver.findElement(By.xpath("//body/div/div/form/div/div/input"));
+        textSMS.sendKeys("1111");
 
-        }
+        WebElement firstChecbox = driver.findElement(By.xpath("/html/body/div[4]/div/form/div[4]/div[1]/div/div/button"));
+        WebElement secondChecbox = driver.findElement(By.xpath("/html/body/div[4]/div/form/div[4]/div[2]/div/div/button"));
+        firstChecbox.click();
+        secondChecbox.click();
+
+        WebElement buttonNext = driver.findElement(By.xpath("/html/body/div[4]/div/form/button/div"));
+        buttonNext.click();
+
+        Thread.sleep(2000);
+        WebElement messagePassport = driver.findElement(By.xpath("/html/body/div[1]/div/main/div/div[2]/form/div[1]/h1"));
+        Assert.assertEquals(messagePassport.getText(), "Паспортные данные");
+
+    }
 
 
 //        driver.quit();
-    }
 }
+
