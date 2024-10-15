@@ -54,28 +54,31 @@ public class TestSL {
 
     @BeforeTest
     public static String testPhone() {
-        RandomDataGenerator phoneNew = new RandomDataGenerator();
-        return phoneNew.getRandomMobilePhone(8);
+        RandomDataGenerator newPhone = new RandomDataGenerator();
+        return newPhone.getRandomMobilePhone(8);
     }
-
     @BeforeTest
     public static String testEmail() {
-        RandomDataGenerator emailNew = new RandomDataGenerator();
-        return emailNew.getRandomEmail(10);
+        RandomDataGenerator newEmail = new RandomDataGenerator();
+        return newEmail.getRandomEmail(10);
     }
-
     @BeforeTest
     public static String testSurname() {
-        RandomDataGenerator surnameNew = new RandomDataGenerator();
-        return surnameNew.getRandomData(10);
+        RandomDataGenerator newSurname = new RandomDataGenerator();
+        return "Тест" + newSurname.getRandomData(5);
+    }
+    @BeforeTest
+    public static String testName() {
+        RandomDataGenerator newName = new RandomDataGenerator();
+        return "Тест" + newName.getRandomData(5);
     }
 
     @Test
     public void testSl() throws InterruptedException {
 
         WebDriver driver = new ChromeDriver();
-
         driver.get("https://kz-solva-release-300.kz.idfaws.com/registration/step1");
+        driver.manage().window().fullscreen();
 //        driver.get("https://solva.kz/registration/step1");
 
 //      System.out.println("Title -->  " + driver.getTitle());
@@ -115,6 +118,10 @@ public class TestSL {
 
         WebElement fieldSurname = driver.findElement(By.xpath("/html/body/div[1]/div/main/div/div[2]/form/div[1]/div[1]/div[1]/div/input"));
         fieldSurname.sendKeys(testSurname());
+
+        WebElement fieldName = driver.findElement(By.xpath("/html/body/div[1]/div/main/div/div[2]/form/div[1]/div[1]/div[2]/div/input"));
+        fieldName.sendKeys(testName());
+
 
     }
 
