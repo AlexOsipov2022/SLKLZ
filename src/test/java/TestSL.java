@@ -4,11 +4,65 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.testng.Assert;
+import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 
 import java.time.Duration;
+import java.util.Random;
 
 public class TestSL {
+
+    static class RandomDataGenerator {
+
+        private static final Random random = new Random();
+
+        public static String getRandomMobilePhone(int length) {
+            String phonePrefix = "+77";
+            String phoneNumberDigits = "123456789";
+            StringBuilder generatedPhone = new StringBuilder();
+
+            for (int i = 1; i < length; i++) {
+                char digit = phoneNumberDigits.charAt(random.nextInt(phoneNumberDigits.length()));
+                generatedPhone.append(digit);
+            }
+            return phonePrefix + generatedPhone.toString();
+        }
+
+        public static String getRandomData(int length) {
+            StringBuilder data = new StringBuilder();
+            char randomChar = (char) ('А' + random.nextInt(32)); // 'А' to 'я'
+            data.append(Character.toUpperCase(randomChar));
+
+            for (int i = 1; i < length; i++) {
+                randomChar = (char) ('а' + random.nextInt(32)); // 'а' to 'я'
+                data.append(randomChar);
+            }
+            return data.toString();
+        }
+
+        public static String getRandomEmail(int length) {
+            StringBuilder email = new StringBuilder();
+            String emailSymbol = "abcdefghijklmnopqrstuvwxyz";
+
+            for (int i = 0; i < length; i++) {
+                char symbol = emailSymbol.charAt(random.nextInt(emailSymbol.length()));
+                email.append(symbol);
+            }
+            return email.toString() + "@example.com"; // добавляем домен для полноты
+        }
+    }
+
+    @BeforeTest
+    public String testPhone() {
+        RandomDataGenerator phoneNew = new RandomDataGenerator();
+        return phoneNew.getRandomMobilePhone(8);
+    }
+
+    @BeforeTest
+    public String testEmail() {
+        RandomDataGenerator emailNew = new RandomDataGenerator();
+        return emailNew.getRandomEmail(10);
+    }
 
     @Test
     public void testSl() throws InterruptedException {
@@ -30,8 +84,8 @@ public class TestSL {
 //        WebElement submitButton = driver.findElement(By.xpath("//button[text()='ДАЛЕЕ']"));
 
 
-        phoneNumber.sendKeys("775555555");
-        email.sendKeys("775555555@gmail.com");
+        phoneNumber.sendKeys(testPhone());
+        email.sendKeys(testEmail());
         submitButton.click();
 
         Thread.sleep(2000);
