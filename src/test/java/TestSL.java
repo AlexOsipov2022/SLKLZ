@@ -53,15 +53,21 @@ public class TestSL {
     }
 
     @BeforeTest
-    public String testPhone() {
+    public static String testPhone() {
         RandomDataGenerator phoneNew = new RandomDataGenerator();
         return phoneNew.getRandomMobilePhone(8);
     }
 
     @BeforeTest
-    public String testEmail() {
+    public static String testEmail() {
         RandomDataGenerator emailNew = new RandomDataGenerator();
         return emailNew.getRandomEmail(10);
+    }
+
+    @BeforeTest
+    public static String testSurname() {
+        RandomDataGenerator surnameNew = new RandomDataGenerator();
+        return surnameNew.getRandomData(10);
     }
 
     @Test
@@ -106,6 +112,9 @@ public class TestSL {
         Thread.sleep(2000);
         WebElement messagePassport = driver.findElement(By.xpath("/html/body/div[1]/div/main/div/div[2]/form/div[1]/h1"));
         Assert.assertEquals(messagePassport.getText(), "Паспортные данные");
+
+        WebElement fieldSurname = driver.findElement(By.xpath("/html/body/div[1]/div/main/div/div[2]/form/div[1]/div[1]/div[1]/div/input"));
+        fieldSurname.sendKeys(testSurname());
 
     }
 
