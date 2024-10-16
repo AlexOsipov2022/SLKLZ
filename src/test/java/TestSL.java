@@ -57,16 +57,19 @@ public class TestSL {
         RandomDataGenerator newPhone = new RandomDataGenerator();
         return newPhone.getRandomMobilePhone(8);
     }
+
     @BeforeTest
     public static String testEmail() {
         RandomDataGenerator newEmail = new RandomDataGenerator();
         return newEmail.getRandomEmail(10);
     }
+
     @BeforeTest
     public static String testSurname() {
         RandomDataGenerator newSurname = new RandomDataGenerator();
         return "Тест" + newSurname.getRandomData(5);
     }
+
     @BeforeTest
     public static String testName() {
         RandomDataGenerator newName = new RandomDataGenerator();
@@ -78,21 +81,16 @@ public class TestSL {
 
         WebDriver driver = new ChromeDriver();
         driver.get("https://kz-solva-release-300.kz.idfaws.com/registration/step1");
+        //        driver.get("https://solva.kz/registration/step1");
         driver.manage().window().fullscreen();
-//        driver.get("https://solva.kz/registration/step1");
-
-//      System.out.println("Title -->  " + driver.getTitle());
-
         driver.manage().timeouts().implicitlyWait(Duration.ofMillis(500));
 
         WebElement phoneNumber = driver.findElement(By.name("phoneNumber"));
         WebElement email = driver.findElement(By.name("email"));
-//        WebElement submitButton = driver.findElement(By.cssSelector("button[type='submit']"));
         WebElement submitButton = driver.findElement(By.xpath("//main/div/div/form/button/div"));
+//        WebElement submitButton = driver.findElement(By.cssSelector("button[type='submit']"));
 //        WebElement submitButton = driver.findElement(By.xpath("/html/body/div/div/main/div/div/form/button/div"));
 //        WebElement submitButton = driver.findElement(By.xpath("//button[text()='ДАЛЕЕ']"));
-
-
         phoneNumber.sendKeys(testPhone());
         email.sendKeys(testEmail());
         submitButton.click();
