@@ -34,11 +34,11 @@ public class TestSL {
 
         public static String getRandomData(int length) {
             StringBuilder data = new StringBuilder();
-            char randomChar = (char) ('А' + random.nextInt(32)); // 'А' to 'я'
-            data.append(Character.toUpperCase(randomChar));
+//            char randomChar = (char) ('А' + random.nextInt(32)); // 'А' to 'я'
+//            data.append(Character.toUpperCase(randomChar));
 
             for (int i = 1; i < length; i++) {
-                randomChar = (char) ('а' + random.nextInt(32)); // 'а' to 'я'
+                char randomChar = (char) ('а' + random.nextInt(32)); // 'а' to 'я'
                 data.append(randomChar);
             }
             return data.toString();
@@ -86,10 +86,17 @@ public class TestSL {
     public void testSl() {
 
         WebDriver driver = new ChromeDriver();
-        driver.get("https://kz-solva-release-300.kz.idfaws.com/registration/step1");
+
+        // Максимизируем окно браузера перед вводом URL
+        driver.manage().window().maximize();
+
+        driver.get("https://kz-solva-release-294-slkz-83946.kz.idfaws.com/registration/step1");
         //        driver.get("https://solva.kz/registration/step1");
 //        driver.manage().window().fullscreen();
         driver.manage().timeouts().implicitlyWait(Duration.ofMillis(500));
+
+        // Устанавливаем неявное ожидание один раз
+        driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
 
         WebElement phoneNumber = driver.findElement(By.name("phoneNumber"));
         WebElement email = driver.findElement(By.name("email"));
@@ -101,8 +108,8 @@ public class TestSL {
         email.sendKeys(testEmail());
         submitButton.click();
 
-//        Thread.sleep(2000);
-        driver.manage().timeouts().implicitlyWait(3, TimeUnit.SECONDS);
+
+//        driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
         WebElement message = driver.findElement(By.xpath("//body/div/div/form/h2"));
         Assert.assertEquals(message.getText(), "ВВЕДИТЕ КОД ИЗ SMS");
 
@@ -117,12 +124,11 @@ public class TestSL {
         WebElement buttonNext = driver.findElement(By.xpath("/html/body/div[4]/div/form/button/div"));
         buttonNext.click();
 
-//        Thread.sleep(2000);
-//        driver.manage().timeouts().implicitlyWait(3, TimeUnit.SECONDS);
-        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
-        WebElement element = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("/html/body/div[1]/div/main/div/div[2]/form/div[1]/h1")));
 
+//        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+//        WebElement element = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("/html/body/div[1]/div/main/div/div[2]/form/div[1]/h1")));
 
+//        driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
         WebElement messagePassport = driver.findElement(By.xpath("/html/body/div[1]/div/main/div/div[2]/form/div[1]/h1"));
         Assert.assertEquals(messagePassport.getText(), "Паспортные данные");
 
