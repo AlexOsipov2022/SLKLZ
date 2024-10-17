@@ -3,12 +3,16 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 
+import java.lang.module.Configuration;
 import java.time.Duration;
 import java.util.Random;
+import java.util.concurrent.TimeUnit;
 
 public class TestSL {
 
@@ -52,6 +56,7 @@ public class TestSL {
         }
     }
 
+
     @BeforeTest
     public static String testPhone() {
         RandomDataGenerator newPhone = new RandomDataGenerator();
@@ -76,13 +81,14 @@ public class TestSL {
         return "Тест" + newName.getRandomData(5);
     }
 
+
     @Test
-    public void testSl() throws InterruptedException {
+    public void testSl() {
 
         WebDriver driver = new ChromeDriver();
         driver.get("https://kz-solva-release-300.kz.idfaws.com/registration/step1");
         //        driver.get("https://solva.kz/registration/step1");
-        driver.manage().window().fullscreen();
+//        driver.manage().window().fullscreen();
         driver.manage().timeouts().implicitlyWait(Duration.ofMillis(500));
 
         WebElement phoneNumber = driver.findElement(By.name("phoneNumber"));
@@ -95,7 +101,8 @@ public class TestSL {
         email.sendKeys(testEmail());
         submitButton.click();
 
-        Thread.sleep(2000);
+//        Thread.sleep(2000);
+        driver.manage().timeouts().implicitlyWait(3, TimeUnit.SECONDS);
         WebElement message = driver.findElement(By.xpath("//body/div/div/form/h2"));
         Assert.assertEquals(message.getText(), "ВВЕДИТЕ КОД ИЗ SMS");
 
@@ -110,7 +117,12 @@ public class TestSL {
         WebElement buttonNext = driver.findElement(By.xpath("/html/body/div[4]/div/form/button/div"));
         buttonNext.click();
 
-        Thread.sleep(2000);
+//        Thread.sleep(2000);
+//        driver.manage().timeouts().implicitlyWait(3, TimeUnit.SECONDS);
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+        WebElement element = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("/html/body/div[1]/div/main/div/div[2]/form/div[1]/h1")));
+
+
         WebElement messagePassport = driver.findElement(By.xpath("/html/body/div[1]/div/main/div/div[2]/form/div[1]/h1"));
         Assert.assertEquals(messagePassport.getText(), "Паспортные данные");
 
