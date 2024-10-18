@@ -4,7 +4,6 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.testng.Assert;
 import org.testng.annotations.AfterTest;
-import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 
@@ -48,5 +47,21 @@ public class AlexOsipovTest {
         Assert.assertEquals(loginTitle.getText(), "Login Page");
     }
 
+    @Test
+    public void coorectPassword() {
+        driver.get("https://the-internet.herokuapp.com/login");
+
+        WebElement userName = driver.findElement(By.id("username"));
+        WebElement userPassword = driver.findElement(By.id("password"));
+        WebElement buttonLogin = driver.findElement(By.cssSelector("button[type='submit']"));
+
+        userName.sendKeys("tomsmith");
+        userPassword.sendKeys("SuperSecretPassword!");
+        buttonLogin.click();
+
+        String expectedUrl = "https://the-internet.herokuapp.com/secure";
+        String actualUrl = driver.getCurrentUrl();
+
+        Assert.assertEquals(expectedUrl, actualUrl);
+    }
 }
-//*[@id="username"]
