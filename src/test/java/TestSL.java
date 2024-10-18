@@ -104,6 +104,7 @@ public class TestSL {
 //        WebElement submitButton = driver.findElement(By.cssSelector("button[type='submit']"));
 //        WebElement submitButton = driver.findElement(By.xpath("/html/body/div/div/main/div/div/form/button/div"));
 //        WebElement submitButton = driver.findElement(By.xpath("//button[text()='ДАЛЕЕ']"));
+//        WebElement fieldName = driver.findElement(By.id("firstName"));
         phoneNumber.sendKeys(testPhone());
         email.sendKeys(testEmail());
         submitButton.click();
