@@ -90,7 +90,8 @@ public class TestSL {
         // Максимизируем окно браузера перед вводом URL
         driver.manage().window().maximize();
 
-        driver.get("https://kz-solva-release-294-slkz-83946.kz.idfaws.com/registration/step1");
+//        driver.get("https://kz-solva-release-294-slkz-83946.kz.idfaws.com/registration/step1");
+        driver.get("http://solva-bank-release.kz.idfaws.com/registration/step1");
         //        driver.get("https://solva.kz/registration/step1");
 //        driver.manage().window().fullscreen();
         driver.manage().timeouts().implicitlyWait(Duration.ofMillis(500));
