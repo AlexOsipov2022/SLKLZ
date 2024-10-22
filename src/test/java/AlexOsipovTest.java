@@ -36,10 +36,11 @@ public class AlexOsipovTest {
     public void formAuthentication() {
         driver.get("https://the-internet.herokuapp.com/");
 
-        WebElement formAuthentication = driver.findElement(By.xpath("/html/body/div[2]/div/ul/li[21]/a"));
+        WebElement formAuthentication = driver.findElement(By.xpath("//a[@href='/login']"));
+//        WebElement formAuthentication = driver.findElement(By.xpath("//a[text()='Form Authentication']"));
         formAuthentication.click();
 
-        WebElement loginTitle = driver.findElement(By.xpath("/html/body/div[2]/div/div/h2"));
+        WebElement loginTitle = driver.findElement(By.xpath("//*[@id=\"content\"]/div/h2"));
         Assert.assertEquals(loginTitle.getText(), "Login Page");
     }
 
