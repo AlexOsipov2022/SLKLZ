@@ -9,29 +9,31 @@ import org.testng.annotations.Test;
 
 import java.time.Duration;
 
-public class AlexOsipovTest {
+public class AlexOsipovOldTest {
 
+    private WebDriver driver;
 
-    @Test
-    public void testMainPage() {
-
-        WebDriver driver = new ChromeDriver();
-
+    @BeforeMethod
+    public void enterCondition() {
+        driver = new ChromeDriver();
         driver.manage().timeouts().implicitlyWait(Duration.ofMillis(500));
-        driver.get("https://the-internet.herokuapp.com/");
+    }
 
-        WebElement titleMessage = driver.findElement(By.className("heading"));
-        Assert.assertEquals(titleMessage.getText(), "Welcome to the-internet");
-
+    @AfterMethod
+    public void quitDriver() {
         driver.quit();
     }
 
     @Test
+    public void testMainPage() {
+        driver.get("https://the-internet.herokuapp.com/");
+
+        WebElement titleMessage = driver.findElement(By.className("heading"));
+        Assert.assertEquals(titleMessage.getText(), "Welcome to the-internet");
+    }
+
+    @Test
     public void formAuthentication() {
-
-        WebDriver driver = new ChromeDriver();
-
-        driver.manage().timeouts().implicitlyWait(Duration.ofMillis(500));
         driver.get("https://the-internet.herokuapp.com/");
 
         WebElement formAuthentication = driver.findElement(By.xpath("//a[@href='/login']"));
@@ -40,16 +42,10 @@ public class AlexOsipovTest {
 
         WebElement loginTitle = driver.findElement(By.xpath("//*[@id=\"content\"]/div/h2"));
         Assert.assertEquals(loginTitle.getText(), "Login Page");
-
-        driver.quit();
     }
 
     @Test
     public void corectPassword() {
-
-        WebDriver driver = new ChromeDriver();
-
-        driver.manage().timeouts().implicitlyWait(Duration.ofMillis(500));
         driver.get("https://the-internet.herokuapp.com/login");
 
         WebElement userName = driver.findElement(By.id("username"));
@@ -64,7 +60,5 @@ public class AlexOsipovTest {
         String actualUrl = driver.getCurrentUrl();
 
         Assert.assertEquals(expectedUrl, actualUrl);
-
-        driver.quit();
     }
 }
