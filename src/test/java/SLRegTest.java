@@ -175,7 +175,7 @@ public class SLRegTest {
 //        JavascriptExecutor js = (JavascriptExecutor) driver;
 //        js.executeScript("arguments[0].scrollIntoView(true);", fieldIIN);
 
-        fieldIIN.click();
+//        fieldIIN.click();
         fieldIIN.sendKeys("1111");
 
 //        actions.moveByOffset(500, 300).click().perform();
@@ -186,7 +186,7 @@ public class SLRegTest {
 
 //        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
 //        wait.until(ExpectedConditions.elementToBeClickable(By.name("passportNumber"))).click();
-        fieldIdenty.click();
+//        fieldIdenty.click();
         fieldIdenty.sendKeys(testIdenty());
 
 //        actions.moveByOffset(500, 300).click().perform();
@@ -201,7 +201,7 @@ public class SLRegTest {
         actions.moveToElement(checkboxMVD).click().perform();
 //        js.executeScript("arguments[0].scrollIntoView(true);", checkboxMVD);
 //        wait.until(ExpectedConditions.elementToBeClickable(By.id("passportAuthority_MVD"))).click();
-        checkboxMVD.click();
+//        checkboxMVD.click();
 
 //        actions.moveByOffset(500, 300).click().perform();
 
@@ -215,15 +215,24 @@ public class SLRegTest {
         WebElement fieldPassportExpirationDate = driver.findElement(By.name("passportExpirationDate"));
         actions.moveToElement(fieldPassportExpirationDate).click().perform();
 //        js.executeScript("arguments[0].scrollIntoView(true);", fieldPassportExpirationDate);
-        fieldPassportExpirationDate.click();
+//        fieldPassportExpirationDate.click();
         fieldPassportExpirationDate.sendKeys("11.11.2030");
-        fieldPassportExpirationDate.sendKeys(Keys.RETURN);
+
+//        fieldPassportExpirationDate.sendKeys(Keys.RETURN);
 
 //        actions.moveByOffset(500, 300).click().perform();
 
-//        WebElement buttonNext21 = driver.findElement(By.xpath("//div[@class=\"Button-module_content__PpYVU\"]"));
-//        actions.moveToElement(buttonNext21).click().perform();
-//        buttonNext21.click();
+
+
+        WebElement buttonNext21 = driver.findElement(By.xpath("//div[@class=\"Button-module_content__PpYVU\"]"));
+
+        JavascriptExecutor js = (JavascriptExecutor) driver;
+        js.executeScript("arguments[0].scrollIntoView(true);", buttonNext21);
+
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+        wait.until(ExpectedConditions.elementToBeClickable(buttonNext21)).click();
+
+        actions.moveToElement(buttonNext21).click().perform();
 
     }
 
