@@ -42,7 +42,7 @@ public class JenkinsPipeLineTest {
 
         return jobList
                 .stream()
-                .map(WebElement::getText)//как рабоатет =>> .map(element -> element.getText())
+                .map(WebElement::getText)//как работает =>> .map(element -> element.getText())
                 .toList();
     }
 

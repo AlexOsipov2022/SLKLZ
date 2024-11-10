@@ -1,11 +1,10 @@
 import org.openqa.selenium.By;
+import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
-import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.Select;
 import org.testng.Assert;
-import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
@@ -13,7 +12,7 @@ import java.time.Duration;
 import java.util.List;
 
 
-public class SeleniumWebFormTest {
+public class SeleniumWebFormSelectionTest {
 
     private WebDriver driver;
 
@@ -98,8 +97,19 @@ public class SeleniumWebFormTest {
         List<String> expectedSelectedOptions = List.of("five", "six");
 
         Assert.assertEquals(actualResult, expectedSelectedOptions);
-
     }
 
+    @Test
+    public void testSliderArrows() {
 
+        driver.get("https://www.selenium.dev/selenium/web/web-form.html");
+        final WebElement sliderExampleRange = driver.findElement(By.name("my-range"));
+
+        sliderExampleRange.click();
+        sliderExampleRange.sendKeys(Keys.LEFT, Keys.LEFT, Keys.LEFT, Keys.LEFT);
+
+        String resultPosition = sliderExampleRange.getAttribute("value");
+
+        Assert.assertEquals(resultPosition, "1");
+    }
 }
