@@ -226,8 +226,11 @@ public class SLRegTest {
 
         WebElement buttonNext21 = driver.findElement(By.xpath("//div[@class=\"Button-module_content__PpYVU\"]"));
 
-        JavascriptExecutor js = (JavascriptExecutor) driver;
-        js.executeScript("arguments[0].scrollIntoView(true);", buttonNext21);
+//        JavascriptExecutor js = (JavascriptExecutor) driver;
+//        js.executeScript("arguments[0].scrollIntoView(true);", buttonNext21);
+
+
+        actions.moveToElement(buttonNext21).perform();
 
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
         wait.until(ExpectedConditions.elementToBeClickable(buttonNext21)).click();
