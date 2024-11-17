@@ -109,7 +109,8 @@ public class SLRegTest {
 //        driver.get("http://solva-bank-release.kz.idfaws.com/registration/step1");
         //        driver.get("https://solva.kz/registration/step1");
 //        driver.manage().window().fullscreen();
-        driver.manage().timeouts().implicitlyWait(Duration.ofMillis(500));
+//        driver.manage().timeouts().implicitlyWait(Duration.ofMillis(500));
+        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(5));
 
         // Устанавливаем неявное ожидание один раз
         driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
@@ -228,6 +229,8 @@ public class SLRegTest {
 
 //        JavascriptExecutor js = (JavascriptExecutor) driver;
 //        js.executeScript("arguments[0].scrollIntoView(true);", buttonNext21);
+
+//        js.executeScript("arguments[0].click();", buttonNext21);
 
 
         actions.moveToElement(buttonNext21).perform();
